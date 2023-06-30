@@ -4,7 +4,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-P", help="password file path")
 parser.add_argument("-H", help="hash file path")
-
+parser.add_argument("-alg", help="hash type")
 parser.add_argument("-v", help="increase output verbosity", action="store_true")
 args = parser.parse_args()
 
@@ -28,7 +28,15 @@ class PasswordCracker:
     def crack_password(self) -> None:
         for h in self.hashes:
             for p in self.passwords:
-                hashed_password = hashlib.sha256(p.encode('utf-8')).hexdigest()
+                if args.alg == "SHA-256":
+                    hashed_password = hashlib.sha256(p.encode('utf-8')).hexdigest()
+                elif args.alg == "SHA-1":
+                    hashed_password = hashlib.sha1(p.encode('utf-8')).hexdigest()
+                elif args.alg == "SHA-512":
+                    hashed_password = hashlib.sha512(p.encode('utf-8')).hexdigest()
+                else:
+                    hashed_password = hashlib.md5(p.encode('utf-8')).hexdigest()
+
                 if args.v:
                     print("=" * 50)
                     print("Trying {}".format(p))
