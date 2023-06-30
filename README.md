@@ -11,4 +11,5 @@ algorithms supported sha-512, sha-1, sha-256, md5
 # Usage
 pip install -r requirements.txt
 
+```python
 python3 ./main.py -P "password.txt" -H "hash.txt" -alg "SHA-256" -v
