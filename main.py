@@ -2,8 +2,10 @@ import hashlib
 import argparse
 
 parser = argparse.ArgumentParser()
-password_location = parser.add_argument("-P", help="password file path")
-hash_location = parser.add_argument("-H", help="hash file path")
+parser.add_argument("-P", help="password file path")
+parser.add_argument("-H", help="hash file path")
+
+parser.add_argument("-v", help="increase output verbosity", action="store_true")
 args = parser.parse_args()
 
 
@@ -27,9 +29,10 @@ class PasswordCracker:
         for h in self.hashes:
             for p in self.passwords:
                 hashed_password = hashlib.sha256(p.encode('utf-8')).hexdigest()
-                print("=" * 50)
-                print("Trying {}".format(p))
-                if h == hashed_password:
+                if args.v:
+                    print("=" * 50)
+                    print("Trying {}".format(p))
+                elif h == hashed_password:
                     print("Password found {}".format(p))
                     print("=" * 50)
 
