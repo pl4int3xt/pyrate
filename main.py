@@ -1,6 +1,11 @@
 import hashlib
 import argparse
 
+parser = argparse.ArgumentParser()
+password_location = parser.add_argument("-P", help="password file path")
+hash_location = parser.add_argument("-H", help="hash file path")
+args = parser.parse_args()
+
 
 class PasswordCracker:
     passwords = []
@@ -30,13 +35,13 @@ class PasswordCracker:
 
 
 if __name__ == "__main__":
-    password_cracker = PasswordCracker("password.txt", "hash.txt")
+    password_cracker = PasswordCracker(args.P, args.H)
     print("""
        ________  ________  ________  ________  ________  ________ 
-      /        \/    /   \/        \/        \/        \/        \
+      /        \/    /   \/        \/        \/        \/        \/
      /         /         /         /         /        _/         /
     //      __/\__      /        _/         //       //        _/ 
-    \\_____/     \_____/\____/___/\___/____/ \______/ \________/      
+    //_____/     \_____/\____/___/\___/____/ \______/ \________/      
     """)
     password_cracker.password_list()
     password_cracker.hash_file()
