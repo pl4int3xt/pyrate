@@ -4,7 +4,6 @@ import hashlib
 class PasswordCracker:
     passwords = []
     hashes = []
-    hashed_passwords = []
 
     def __init__(self, password_location, hash_location):
         self.password_location = password_location
@@ -18,23 +17,20 @@ class PasswordCracker:
         with open(self.hash_location, 'r') as f:
             self.hashes = [h.strip() for h in f.readlines()]
 
-    def get_hashes(self):
-        self.hashed_passwords = [hashlib.sha256(p.encode('utf-8')).hexdigest() for p in self.passwords]
-
     def crack_password(self) -> None:
         for h in self.hashes:
-            for p in self.hashed_passwords:
-                if h == p:
+            for p in self.passwords:
+                hashed_password = hashlib.sha256(p.encode('utf-8')).hexdigest()
+                if h == hashed_password:
+                    print("=" * 50)
+                    print("Trying {}".format(p))
+                    print("=" * 50)
                     print("Password found {}".format(p))
-                    break
+                    print("=" * 50)
 
 
 if __name__ == "__main__":
     password_cracker = PasswordCracker("password.txt", "hash.txt")
     password_cracker.password_list()
     password_cracker.hash_file()
-    password_cracker.get_hashes()
     password_cracker.crack_password()
-    print(password_cracker.crack_password())
-    print(password_cracker.passwords_and_hashes)
-
