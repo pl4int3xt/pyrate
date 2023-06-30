@@ -21,16 +21,12 @@ class PasswordCracker:
     def get_hashes(self):
         self.hashed_passwords = [hashlib.sha256(p.encode('utf-8')).hexdigest() for p in self.passwords]
 
-    def crack_password(self) -> str:
+    def crack_password(self) -> None:
         for h in self.hashes:
             for p in self.hashed_passwords:
-                print(h, p)
                 if h == p:
-                    print("=============")
-                    return "Password found {}".format(p)
-                else:
-                    print("=" * 50)
-                    return "Not found"
+                    print("Password found {}".format(p))
+                    break
 
 
 if __name__ == "__main__":
@@ -40,4 +36,5 @@ if __name__ == "__main__":
     password_cracker.get_hashes()
     password_cracker.crack_password()
     print(password_cracker.crack_password())
+    print(password_cracker.passwords_and_hashes)
 
