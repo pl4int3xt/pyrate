@@ -40,7 +40,7 @@ class PasswordCracker:
                 if args.v:
                     print("=" * 50)
                     print("Trying {}".format(p))
-                elif h == hashed_password:
+                if h == hashed_password:
                     print("Password found {}".format(p))
                     print("=" * 50)
 
