@@ -43,6 +43,7 @@ class PasswordCracker:
                 if h == hashed_password:
                     print("Password found {}".format(p))
                     print("=" * 50)
+                    break
 
 
 if __name__ == "__main__":
@@ -51,8 +52,8 @@ if __name__ == "__main__":
        ________  ________  ________  ________  ________  ________ 
       /        \/    /   \/        \/        \/        \/        \/
      /         /         /         /         /        _/         /
-    //      __/\__      /        _/         //       //        _/ 
-    //_____/     \_____/\____/___/\___/____/ \______/ \________/      
+    //      __/\__      /        _/         //       //        _/
+    //_____/     \_____/\____/___/\___/____/ \______/ \________/
     """)
     password_cracker.password_list()
     password_cracker.hash_file()
